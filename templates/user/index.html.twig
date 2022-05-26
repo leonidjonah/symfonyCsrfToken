@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Hello UserController!
+        
+    
+{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN')  %}
+    <h5 class="card-title displayAdmin">
+        <a class="btn btn-outline-secondary btn-lg" href="{{ url('add_user') }}">
+            <i class="fas fa-plus"></i>
+            Ajout       
+        </a>
+    </h5>
+{% endif %}
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Role
+                                    
+                </th>
+                <th>
+                    Action
+                                    
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>
+                        {{ user.email }}
+                    </td>
+                    {% if user.roles[0] =="ROLE_USER" %}
+                        <td>
+                            Utilisateur
+                                                    
+                        </td>
+                    {% else %}
+                        <td>
+                            Administrateur
+                        </td>
+                    {% endif %}
+                    <td>
+                        {% if user.email == app.user.email %}
+                        <span class="badge badge-success">Connecter</span>
+                        {% else %}
+                        {% if is_granted('ROLE_ADMIN')  %}
+                        <button data-id="{{user.id}}" class="btn btn-danger btn-sm open_modal_delete"><i class="fas fa-trash"></i></button>
+                        {% endif %}
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- Modal Supprimer -->
+	<div class="modal fade" id="modal_delete" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<form action="{{ path('delete_user') }}" method="post">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="mb-3">
+							Vous vouler vraiment supprimer cette compte
+							<input type="hidden" name="id" id="inputId_delete">
+							<input type="hidden" name="inputToken_delete" id="inputToken_delete" value="{{csrf_token('delete-item')}}">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i></button>
+						<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+    <script>
+		$(document).on("click", ".open_modal_delete", function () {
+			$('#modal_delete').modal('show');
+			var id = $(this).data('id');
+			$("#inputId_delete").val(id);
+		});
+	</script>
+{% endblock %}

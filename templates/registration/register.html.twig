@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Register 
+    
+{% endblock %}
+
+{% block body %}
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-5">
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="fa fa-user-o"></span>
+                        </div>
+                        <h3 class="text-center mb-4">
+                            S'inscrire                    
+                        </h3>
+                        {{ form_start(registrationForm) }}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    {{ form_row(registrationForm.username, {
+                                "label": "Nom d'utilisateur",
+                                "required": true,
+                                "attr": {
+                                  "placeholder": "Nom d'utilisateur",
+                                  'class': 'form-control'
+                                }
+                            }) }}
+                                    {{ form_row(registrationForm.email, {
+                                "label": "Email",
+                                "required": true,
+                                "type": "email",
+                                "attr": {
+                                  "placeholder": "Email",
+                                  'class': 'form-control'
+                                }
+                            }) }}
+                                    {{ form_row(registrationForm.roles, {
+                                "label": "Role",
+                                "required": true,
+                                "type": "",
+                                'readonly:': true,
+                                "attr": {
+                                  'class': 'form-control'
+                                }
+                            }) }}
+                                    {{ form_row(registrationForm.plainPassword, {
+                                "label": "Mots de passe",
+                                "required": true,
+                                "attr": {
+                                  'class': 'form-control'
+                                }
+                            }) }}
+                                    {{ form_row(registrationForm.agreeTerms, {
+                                "label": "Accepter les conditions",
+                                "required": true
+                            }) }}
+                                </div>
+                            </div>
+                            <div class="col-8 col-sm-6">
+                                <button type="submit" class="btn btn-info">
+                                    Ajouter                          
+                                                                
+                                                
+                                </button>
+                            </div>
+                            <div class="col-4 col-sm-6 text-right">
+                                <a href="{{ url('app_user') }}" class="btn btn-default">
+                                    Retour                 
+                                                                
+                                                
+                                </a>
+                            </div>
+                        </div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

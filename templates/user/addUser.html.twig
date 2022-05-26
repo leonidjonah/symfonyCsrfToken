@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <h5 class="card-title">
+        Formulaire d'ajout du nouvelle utilisateur
+    </h5>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+				<input type="hidden" name="inputToken_add" id="inputToken_add" value="{{csrf_token('add-item')}}">
+                {{ form_row(form.username, {
+				"label": "Nom d'utilisateur",
+				"required": true,
+				"attr": {
+				  'class': 'form-control'
+				}
+			}) }}
+                {{ form_row(form.email, {
+				"label": "Email",
+				"type": "email",
+				"required": true,
+				"attr": {
+				  'class': 'form-control'
+				}
+			}) }}
+                {{ form_row(form.roles, {
+				"label": "Roles",
+				"required": true,
+				"attr": {
+				  'class': 'form-control'
+				}
+			}) }}
+                {{ form_row(form.password, {
+                                "label": "Mots de passe",
+                                "required": true,
+                                "attr": {
+                                  'class': 'form-control'
+                                }
+                            }) }}
+            </div>
+        </div>
+        <div class="col-8 col-sm-6">
+            {{ form_row(form.submit, { 'label': 'Ajouter', 'attr': {'class': 'btn btn-info'} }) }}
+        </div>
+        <div class="col-4 col-sm-6 text-right">
+            <a href="{{ url('app_user') }}" class="btn btn-default">
+                Retour
+                            
+            </a>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
