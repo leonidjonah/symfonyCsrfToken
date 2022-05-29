@@ -1,9 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CsrfToken
+{% block title %}Log in!
 {% endblock %}
 
 {% block body %}
+<style>
+	html, body {
+    height:100%;
+}
+body {
+  margin: 0;
+}
+.container-fluid {
+    height: 100%;
+}
+
+.row {
+  height: 100%; 
+}
+.col-md-6 {
+  float:left;
+  
+  min-height: 100%;
+}
+ 
+.right {
+background-color: #1D1D1D;
+}
+</style>
+<div class="row">
+    <div class="col-md-6 left">
+		<div class="container">
+			<h2 class="text-center mt-4">ApiJwtAuth</h2>
+			<ul>
+				<li>S'inscrire <code>{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}api/users</code></li>
+				<li>Identifier <code>{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}authentication_token</code></li>
+				<li>Supprimer <code>{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}api/users/{id}</code></li>
+				<li>Afficher <code>{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}api/users</code></li>
+			</ul>
+			<p>1) L'utilisateur doit s'inscrire pour utiliser l'application</p>
+			<p>2) L'utilisateur doit s'identifier pour avoir une jeton qui est necessaire a chaque action de l'application</p>
+			<p>3) Seul l'administrateur peut supprimer ou afficher les autres utilisateurs ("roles": ["admin"])</p>
+		</div>
+	</div>
+    <div class="col-md-6 right">
+	<h2 class="text-white text-center mt-4">CsrfToken</h2>
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -17,7 +58,6 @@
 							{% if error %}
 								<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 							{% endif %}
-
 							{% if app.user %}
 								<div class="mb-3">
 									vous etes deja connecter entant que
@@ -45,5 +85,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+		</section>
+	</div>
+ </div>
 {% endblock %}
