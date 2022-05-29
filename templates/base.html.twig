@@ -6,10 +6,18 @@
 			{% block title %}CsrfToken
 			{% endblock %}
 		</title>
+		{% block stylesheets %}
+                 	<link rel="stylesheet" href="/build/app.css"> -->
+        	{% endblock %}
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 		<link href="{{ asset('fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 		<link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
 		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+		{% block javascripts %}
+            	{{ encore_entry_script_tags('app') }}
+                	<script src="/build/runtime.js" defer></script>
+                	<script src="/build/app.js" defer></script>
+        	{% endblock %}
 	</head>
 	<body>
 		{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')  %}
