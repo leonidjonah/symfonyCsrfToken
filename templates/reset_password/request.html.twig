@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    <section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-lg-5">
+					<div class="login-wrap p-4 p-md-5">
+                    {% for flash_error in app.flashes('reset_password_error') %}
+                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                    {% endfor %}
+		        	<h3 class="text-center mb-4">Reinitialisez votre mot de passe</h3>
+                        {{ form_start(requestForm) }}
+                            {{ form_row(requestForm.email, {
+                                "required": true,
+                                "attr": {
+                                  "placeholder": "email",
+                                  'class': 'form-control'
+                                }
+                            }) }}<br>
+	                        <div class="form-group">
+	                        	<button class="form-control btn btn-primary rounded submit px-3">Ok</button>
+	                        </div>
+                        {{ form_end(requestForm) }}
+                        <div class="form-group d-md-flex">
+							<div class="w-50 text-md-left">
+								<a href="{{ url('app_login') }}">Retour</a>
+							</div>
+						</div>
+	                </div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

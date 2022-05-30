@@ -78,6 +78,9 @@ background-color: #1D1D1D;
 								<div class="w-50 text-md-left">
 									<a href="{{ url('app_register') }}">S'inscrire</a>
 								</div>
+								<div class="w-50 text-md-right">
+									<a href="{{ url('app_forgot_password_request') }}">Mots de passe oublie</a>
+								</div>
 							</div>
 							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 						</form>
